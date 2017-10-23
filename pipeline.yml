@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: List
+metadata: {}
+items:
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      pipeline.alpha.openshift.io/uses: '[{"name": "ruby-ex", "namespace": "", "kind": "DeploymentConfig"}]'
+    name: ruby-ex-pipeline
+  spec:
+    source:
+      git:
+        ref: master
+        uri: https://github.com/jw3/ruby-ex.git
+      type: Git
+    strategy:
+      type: JenkinsPipeline
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: Jenkinsfile
